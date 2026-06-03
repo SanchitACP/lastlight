@@ -270,6 +270,6 @@ shape = SubResource("CapsuleShape2D_1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=863819859]
 position = Vector2(10, 2)
-scale = Vector2(2.0, 2.0)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0owmy")
 animation = &"idle_down"
