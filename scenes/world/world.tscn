@@ -521,15 +521,21 @@ tile_set = SubResource("TileSet_6m72w")
 [node name="Player" parent="." unique_id=1258027818 instance=ExtResource("1_player")]
 position = Vector2(320, 240)
 
-[node name="WoodNode" parent="." unique_id=1815016198 instance=ExtResource("3_resnode")]
-position = Vector2(370, 220)
+[node name="WoodNode1" parent="." unique_id=1111111101 instance=ExtResource("3_resnode")]
+position = Vector2(210, 155)
 
-[node name="FuelNode" parent="." unique_id=1895953291 instance=ExtResource("3_resnode")]
-position = Vector2(370, 260)
+[node name="WoodNode2" parent="." unique_id=1111111102 instance=ExtResource("3_resnode")]
+position = Vector2(430, 175)
+
+[node name="WoodNode3" parent="." unique_id=1111111103 instance=ExtResource("3_resnode")]
+position = Vector2(255, 335)
+
+[node name="FuelNode" parent="." unique_id=1111111104 instance=ExtResource("3_resnode")]
+position = Vector2(445, 315)
 resource_type = "fuel"
 
-[node name="ScrapNode" parent="." unique_id=2027933361 instance=ExtResource("3_resnode")]
-position = Vector2(370, 300)
+[node name="ScrapNode" parent="." unique_id=1111111105 instance=ExtResource("3_resnode")]
+position = Vector2(340, 130)
 resource_type = "scrap"
 
 [node name="InventoryUI" parent="." unique_id=959654727 instance=ExtResource("6_t5ptc")]
