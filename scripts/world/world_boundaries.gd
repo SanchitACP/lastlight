@@ -1,36 +1,42 @@
 extends Node2D
 
-# World boundary walls — invisible StaticBody2D walls around the map edges.
-# Map is 40 tiles wide x 30 tiles tall at 16px per tile = 640 x 480 px.
-# Adjust MAP_WIDTH / MAP_HEIGHT if you repaint the tilemap later.
+# Automatically calculates boundaries from the TileMapLayer's actual painted area.
+# No need to manually update MAP_WIDTH/HEIGHT when you repaint the tilemap.
 
-const MAP_WIDTH = 160   # 10 tiles wide (5 tiles each side)
-const MAP_HEIGHT = 160  # 10 tiles tall (5 tiles each side)
-const WALL_THICKNESS = 32
-
-# Centered on player spawn
-const CENTER = Vector2(320, 240)
+const WALL_THICKNESS = 64
 
 func _ready():
-	print("WorldBoundaries script running")
-	var left   = CENTER.x - MAP_WIDTH / 2.0
-	var right  = CENTER.x + MAP_WIDTH / 2.0
-	var top    = CENTER.y - MAP_HEIGHT / 2.0
-	var bottom = CENTER.y + MAP_HEIGHT / 2.0
+	var tilemap = get_parent().get_node("TileMapLayer")
 
-	_create_wall(Vector2(CENTER.x, top - WALL_THICKNESS / 2.0),    MAP_WIDTH, WALL_THICKNESS)  # top
-	_create_wall(Vector2(CENTER.x, bottom + WALL_THICKNESS / 2.0), MAP_WIDTH, WALL_THICKNESS)  # bottom
-	_create_wall(Vector2(left - WALL_THICKNESS / 2.0,  CENTER.y),  WALL_THICKNESS, MAP_HEIGHT) # left
-	_create_wall(Vector2(right + WALL_THICKNESS / 2.0, CENTER.y),  WALL_THICKNESS, MAP_HEIGHT) # right
+	# get_used_rect() returns tile coordinates of the painted area
+	var used_rect = tilemap.get_used_rect()
+	var tile_size = tilemap.tile_set.tile_size
+	var tmap_scale = tilemap.scale
+	var tmap_pos = tilemap.position
+
+	# Convert tile rect to world coordinates
+	var world_left   = tmap_pos.x + used_rect.position.x * tile_size.x * tmap_scale.x
+	var world_top    = tmap_pos.y + used_rect.position.y * tile_size.y * tmap_scale.y
+	var world_right  = tmap_pos.x + used_rect.end.x * tile_size.x * tmap_scale.x
+	var world_bottom = tmap_pos.y + used_rect.end.y * tile_size.y * tmap_scale.y
+
+	var world_width  = world_right - world_left
+	var world_height = world_bottom - world_top
+	var center = Vector2((world_left + world_right) / 2.0, (world_top + world_bottom) / 2.0)
+
+	print("Island bounds: ", world_left, ",", world_top, " to ", world_right, ",", world_bottom)
+
+	_create_wall(Vector2(center.x, world_top - WALL_THICKNESS / 2.0),    world_width + WALL_THICKNESS * 2, WALL_THICKNESS)  # top
+	_create_wall(Vector2(center.x, world_bottom + WALL_THICKNESS / 2.0), world_width + WALL_THICKNESS * 2, WALL_THICKNESS)  # bottom
+	_create_wall(Vector2(world_left - WALL_THICKNESS / 2.0, center.y),   WALL_THICKNESS, world_height + WALL_THICKNESS * 2) # left
+	_create_wall(Vector2(world_right + WALL_THICKNESS / 2.0, center.y),  WALL_THICKNESS, world_height + WALL_THICKNESS * 2) # right
 
 func _create_wall(pos: Vector2, width: float, height: float):
 	var body = StaticBody2D.new()
 	body.position = pos
-
 	var shape = CollisionShape2D.new()
 	var rect = RectangleShape2D.new()
 	rect.size = Vector2(width, height)
 	shape.shape = rect
-
 	body.add_child(shape)
 	add_child(body)
