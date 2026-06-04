@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://b34rbl44fywnc" path="res://scripts/world/world_boundaries.gd" id="2_bounds"]
 [ext_resource type="PackedScene" uid="uid://cgk8tb7blo2en" path="res://scenes/resources/resource_node.tscn" id="3_resnode"]
 [ext_resource type="Texture2D" uid="uid://bfhopkus6pbwv" path="res://assets/tilesets/environment/Tilesets/Water_tiles.png" id="3_v5dby"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_ui.tscn" id="6_t5ptc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1fp7r"]
 texture = ExtResource("1_sl2e5")
@@ -530,3 +531,5 @@ resource_type = "fuel"
 [node name="ScrapNode" parent="." unique_id=2027933361 instance=ExtResource("3_resnode")]
 position = Vector2(370, 300)
 resource_type = "scrap"
+
+[node name="InventoryUI" parent="." unique_id=959654727 instance=ExtResource("6_t5ptc")]

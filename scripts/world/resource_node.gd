@@ -44,5 +44,8 @@ func _on_body_exited(body):
 		label.visible = false
 
 func _collect():
+	# Hand the resource to the global Inventory singleton. The UI listens to
+	# Inventory's signal and updates itself — this node doesn't touch the UI.
+	Inventory.add(resource_type, resource_amount)
 	print("Picked up: ", resource_amount, "x ", resource_type)
 	queue_free()
