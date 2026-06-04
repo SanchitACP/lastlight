@@ -290,5 +290,14 @@ color = Color(1, 0, 0, 1)
 [node name="Player" parent="." unique_id=1258027818 instance=ExtResource("1_player")]
 position = Vector2(320, 240)
 
-[node name="ResourceNode" parent="." instance=ExtResource("3_resnode")]
-position = Vector2(370, 240)
+[node name="WoodNode" parent="." instance=ExtResource("3_resnode")]
+position = Vector2(370, 220)
+resource_type = "wood"
+
+[node name="FuelNode" parent="." instance=ExtResource("3_resnode")]
+position = Vector2(370, 260)
+resource_type = "fuel"
+
+[node name="ScrapNode" parent="." instance=ExtResource("3_resnode")]
+position = Vector2(370, 300)
+resource_type = "scrap"

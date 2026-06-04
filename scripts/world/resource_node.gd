@@ -6,8 +6,26 @@ extends Area2D
 var player_nearby: bool = false
 
 @onready var label = $Label
+@onready var sprite = $Sprite2D
+
+const SPRITE_REGIONS = {
+	"wood":  Rect2(0,  48, 16, 16),
+	"fuel":  Rect2(0,  16, 40, 16),
+	"scrap": Rect2(64, 48, 16, 16),
+}
 
 func _ready():
+	if resource_type in SPRITE_REGIONS:
+		var atlas = sprite.texture as AtlasTexture
+		if atlas:
+			atlas = atlas.duplicate()
+			atlas.region = SPRITE_REGIONS[resource_type]
+			sprite.texture = atlas
+	if resource_type == "scrap":
+		sprite.scale = Vector2(4, 4)
+	if resource_type == "fuel":
+		sprite.scale = Vector2(1, 1)
+
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 

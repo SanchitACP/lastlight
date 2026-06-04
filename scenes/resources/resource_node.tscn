@@ -1,30 +1,31 @@
-[gd_scene format=4]
+[gd_scene format=3 uid="uid://cgk8tb7blo2en"]
 
-[ext_resource type="Script" path="res://scripts/world/resource_node.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/tilesets/environment/Props/Static/Resources.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://o374outvqw6x" path="res://scripts/world/resource_node.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c51wbnxckiycu" path="res://assets/tilesets/environment/Props/Static/Resources.png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_tex")
+region = Rect2(66.91974, 49.809715, 9.358055, 9.140427)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 32.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
-atlas = ExtResource("2_tex")
-region = Rect2(0, 16, 16, 16)
-
-[node name="ResourceNode" type="Area2D"]
+[node name="ResourceNode" type="Area2D" unique_id=1751352187]
 script = ExtResource("1_script")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=815762575]
+position = Vector2(-1.5, 1.5)
+scale = Vector2(1.925, 2.1875)
 texture = SubResource("AtlasTexture_1")
-scale = Vector2(2, 2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=249664399]
 shape = SubResource("CircleShape2D_1")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=460768934]
+visible = false
 offset_left = -20.0
 offset_top = -40.0
 offset_right = 20.0
 offset_bottom = -20.0
 text = "E"
 horizontal_alignment = 1
-visible = false
